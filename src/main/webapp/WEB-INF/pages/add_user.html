@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Add User</title>
+</head>
+<body>
+<h2>Add User</h2>
+<div>
+    <form action="#" th:action="@{/admin/add}" th:object="${user}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="text" th:field="${name}" placeholder="name">
+        <br/>
+        <input type="text" th:field="*{mail}" placeholder="mail">
+        <br/>
+        <input type="text" th:field="*{password}" placeholder="password">
+        <br/>
+
+        <br/>
+        <select multiple name="roles" size="3" th:id="roles" required>
+            <option disabled>Select roles</option>
+            <option th:each="role : ${allRoles}" th:value="${role}" th:text="${role.role}"></option>
+        </select>
+        <br/>
+        <button type="submit">Add User</button>
+    </form>
+    <br/>
+    <form th:action="@{/admin/users}">
+        <button type="submit" class="btn btn-outline-danger">Back to User List</button>
+    </form>
+    <br/>
+    <form th:action="@{/logout}">
+        <button type="submit" class="btn btn-outline-danger">Logout</button>
+    </form>
+</div>
+</body>
+</html>
