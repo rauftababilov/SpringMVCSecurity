@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>User Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>User Directory</h3>
+    <hr>
+    <a th:href="@{/logout}" class="btn btn-warning">Log out</a>
+    <hr>
+    <a th:href="@{/user/showUser}" class="btn btn-primary btn-small mb-3">Show user</a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="user : ${users}">
+
+            <td th:text="${user.name}"/>
+            <td th:text="${user.email}"/>
+            <td th:text="${user.password}"/>
+            <td th:text="${#strings.arrayJoin(user.roles, ' ')}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+

@@ -4,7 +4,6 @@ import web.model.Role;
 import web.model.User;
 
 import java.util.List;
-import java.util.Set;
 
 public interface UserService {
     void addUser(User user);
@@ -13,6 +12,5 @@ public interface UserService {
     void updateUser(User user);
     User getUserById(Long id);
     User getUserByName(String name);
-    void createRole(Set<Role> roles);
-    Set<Role> getAllRoles();
+    List<Role> getAllRoles();
 }

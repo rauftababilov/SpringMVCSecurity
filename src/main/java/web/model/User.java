@@ -3,6 +3,7 @@ package web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,17 +15,18 @@ import java.util.Set;
 @Table(name = "users")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
     @Column(name = "name")
     public String name;
 
-    @Column(name = "mail")
-    public String mail;
+    @Column(name = "email")
+    public String email;
 
     @Column(name = "password")
     private String password;
@@ -32,19 +34,10 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    public User() {
-    }
-
-    public User(String name, String mail, String password, Set<Role> roles) {
-        this.name = name;
-        this.mail = mail;
-        this.password = password;
-        this.roles = roles;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return getRoles();
     }
 
     @Override
@@ -76,4 +69,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

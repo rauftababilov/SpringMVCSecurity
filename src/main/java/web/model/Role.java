@@ -2,6 +2,7 @@ package web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -15,9 +16,11 @@ import java.util.Set;
 @Table(name = "roles")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Role implements GrantedAuthority {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String role;
@@ -26,20 +29,14 @@ public class Role implements GrantedAuthority {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
-    public Role() {
-    }
-
-    public Role(String role) {
-        if (role.equals("ADMIN")) {
-            this.id = 1L;
-        } else if (role.equals("USER")) {
-            this.id = 2L;
-        }
-        this.role = role;
-    }
 
     @Override
     public String getAuthority() {
+        return getRole();
+    }
+
+    @Override
+    public String toString() {
         return role;
     }
 }

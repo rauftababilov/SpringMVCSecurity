@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Edit User</title>
+</head>
+
+<body>
+<div class="container">
+    <h3>Admin Directory</h3>
+    <hr>
+
+    <p class="h4 mb-4">Edit User</p>
+
+    <form action="#" th:action="@{/admin/editUser/{id}(id=${user.id})}" th:object="${user}" method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <input type="text" th:field="*{name}"
+               class="form-control mb-4 col-4" placeholder="First name" required>
+
+        <input type="text" th:field="*{email}"
+               class="form-control mb-4 col-4" placeholder="Email" required>
+
+        <input type="text" th:field="*{password}"
+               class="form-control mb-4 col-4" placeholder="Password" required>
+
+        <td>
+                <select class="form-control form-control-sm"
+                        multiple required size="2" th:name="roles" th:field="*{roles}">
+                    <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}"></option>
+                </select>
+        </td>
+
+        <br>
+        <button type="submit" class="btn btn-info col-2">Edit</button>
+
+    </form>
+
+    <hr>
+    <a th:href="@{/admin/usersList}" class="btn btn-warning">Back to User List</a>
+</div>
+</body>
+</html>
+

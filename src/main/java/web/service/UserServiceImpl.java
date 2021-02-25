@@ -18,12 +18,14 @@ import java.util.Set;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserDao userDao;
-
-    @Autowired
     private RoleDao roleDao;
 
+    @Autowired
+    public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
+        this.userDao = userDao;
+        this.roleDao = roleDao;
+    }
 
     @Override
     public void addUser(User user) {
@@ -56,12 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createRole(Set<Role> roles) {
-        roleDao.createRole(roles);
-    }
-
-    @Override
-    public Set<Role> getAllRoles() {
+    public List<Role> getAllRoles() {
         return roleDao.getAllRoles();
     }
 }
