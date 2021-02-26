@@ -1,6 +1,8 @@
 package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.RoleDao;
@@ -8,9 +10,6 @@ import web.dao.UserDao;
 import web.model.Role;
 import web.model.User;
 
-import javax.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -28,37 +27,42 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
-        userDao.addUser(user);
+    public User findById(Long id) {
+        return userDao.findById(id);
     }
 
     @Override
-    public List<User> listUsers() {
-        return userDao.listUsers();
+    public List<User> findAll() {
+        return (List<User>) userDao.findAll();
     }
 
     @Override
-    public void removeUser(Long id) {
-        userDao.removeUser(id);
+    public User findByName(String name) {
+        return userDao.findByName(name);
     }
 
     @Override
-    public void updateUser(User user) {
-        userDao.updateUser(user);
+    public void saveUser(User user) {
+        userDao.saveUser(user);
     }
 
     @Override
-    public User getUserById(Long id) {
-        return userDao.getUserById(id);
+    public void editUser(User user) {
+        userDao.editUser(user);
     }
 
     @Override
-    public User getUserByName(String name) {
-        return userDao.getUserByName(name);
+    public void deleteById(Long id) {
+        userDao.deleteById(id);
     }
 
     @Override
-    public List<Role> getAllRoles() {
-        return roleDao.getAllRoles();
+    public Set<Role> findAllRoles() {
+        return roleDao.findAllRoles();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userDao.findByName(username);
     }
 }

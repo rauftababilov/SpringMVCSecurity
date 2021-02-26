@@ -27,10 +27,10 @@ public class RoleDaoImpl implements RoleDao {
 
     @Transactional
     @Override
-    public List<Role> getAllRoles() {
-//        Set<Role> roleSet = new HashSet();
+    public Set<Role> findAllRoles() {
+        Set<Role> roleSet = new HashSet();
         List<Role> roleList = entityManager.createQuery("select role from Role role").getResultList();
-//        roleSet.addAll(roleList);
-        return roleList;
+        roleSet.addAll(roleList);
+        return roleSet;
     }
 }

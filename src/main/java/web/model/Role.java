@@ -29,6 +29,15 @@ public class Role implements GrantedAuthority {
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
+    public Role(String role) {
+        if (role.equals("ADMIN")) {
+            this.id = 1L;
+        } else if (role.equals("USER")) {
+            this.id = 2L;
+        }
+        this.role = role;
+    }
+
 
     @Override
     public String getAuthority() {

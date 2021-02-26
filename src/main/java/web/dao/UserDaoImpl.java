@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-
     @PersistenceContext
     EntityManager entityManager;
 
@@ -21,13 +20,19 @@ public class UserDaoImpl implements UserDao {
 
     @Transactional
     @Override
-    public void addUser(User user) {
+    public void saveUser(User user) {
         getEntityManager().persist(user);
     }
 
     @Transactional
     @Override
-    public void removeUser(Long id) {
+    public void editUser(User user) {
+        getEntityManager().merge(user);
+    }
+
+    @Transactional
+    @Override
+    public void deleteById(Long id) {
         getEntityManager().createQuery("delete from User where id=:id")
                 .setParameter("id", id)
                 .executeUpdate();
@@ -35,20 +40,14 @@ public class UserDaoImpl implements UserDao {
 
     @Transactional
     @Override
-    public void updateUser(User user) {
-        getEntityManager().merge(user);
-    }
-
-    @Transactional
-    @Override
-    public User getUserById(Long id) {
+    public User findById(Long id) {
         return getEntityManager().find(User.class, id);
     }
 
 
     @Transactional
     @Override
-    public List<User> listUsers() {
+    public List<User> findAll() {
         return getEntityManager()
                 .createQuery("from User")
                 .getResultList();
@@ -56,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 
     @Transactional
     @Override
-    public User getUserByName(String name) {
+    public User findByName(String name) {
         return (User) getEntityManager().createQuery("select user from User user where user.name=:name")
                 .setParameter("name", name)
                 .getSingleResult();
