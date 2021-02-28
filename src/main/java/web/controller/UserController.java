@@ -1,6 +1,6 @@
 package web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +11,10 @@ import web.service.UserService;
 
 @Controller
 @RequestMapping(value = "/user")
+@AllArgsConstructor
 public class UserController {
 
     private UserService userService;
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 
 
     @GetMapping("showUser")

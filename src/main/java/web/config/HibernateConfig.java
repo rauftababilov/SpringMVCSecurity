@@ -1,5 +1,6 @@
 package web.config;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,10 +23,10 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaRepositories("web")
 @PropertySource(value = {"classpath:application.properties"})
+@AllArgsConstructor
 public class HibernateConfig {
 
-    @Autowired
-    private Environment environment;
+    private final Environment environment;
 
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {

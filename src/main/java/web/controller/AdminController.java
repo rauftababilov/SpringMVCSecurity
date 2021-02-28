@@ -1,6 +1,6 @@
 package web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,13 +9,10 @@ import web.service.UserService;
 
 @Controller
 @RequestMapping(value = "/admin")
+@AllArgsConstructor
 public class AdminController {
-    private UserService userService;
 
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
 
 
     @GetMapping("usersList")

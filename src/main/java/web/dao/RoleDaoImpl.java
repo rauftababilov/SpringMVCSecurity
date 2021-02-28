@@ -1,5 +1,6 @@
 package web.dao;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.Role;
@@ -11,15 +12,12 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
+@AllArgsConstructor
 public class RoleDaoImpl implements RoleDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    protected EntityManager getEntityManager(){
-        return this.entityManager;
-    }
-
-//    @Transactional
+    //    @Transactional
 //    @Override
 //    public void createRole(Set<Role> roles) {
 //        roles.forEach(role -> entityManager.persist(role));

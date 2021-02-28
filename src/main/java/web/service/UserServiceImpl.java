@@ -1,5 +1,6 @@
 package web.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,16 +16,11 @@ import java.util.Set;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
     private RoleDao roleDao;
-
-    @Autowired
-    public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
-        this.userDao = userDao;
-        this.roleDao = roleDao;
-    }
 
     @Override
     public User findById(Long id) {
@@ -33,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-        return (List<User>) userDao.findAll();
+        return userDao.findAll();
     }
 
     @Override

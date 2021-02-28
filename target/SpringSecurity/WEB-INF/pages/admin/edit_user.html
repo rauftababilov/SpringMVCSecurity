@@ -28,12 +28,9 @@
         <input type="text" th:field="*{password}"
                class="form-control mb-4 col-4" placeholder="Password" required>
 
-        <td>
-                <select class="form-control form-control-sm"
-                        multiple required size="2" th:name="roles" th:field="*{roles}">
-                    <option th:each="role : ${roles}" th:value="${role}" th:text="${role.role}"></option>
-                </select>
-        </td>
+        <select class="form-control col-4" th:field="*{roles}">
+            <option th:each="role : ${roles}" th:value="${role}" th:text="${role.role}"></option>
+        </select>
 
         <br>
         <button type="submit" class="btn btn-info col-2">Edit</button>
