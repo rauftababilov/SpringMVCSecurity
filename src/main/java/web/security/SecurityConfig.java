@@ -31,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // http.csrf().disable(); - попробуйте выяснить сами, что это даёт
         http.authorizeRequests()
                                 .antMatchers("/login").anonymous()
-                                .antMatchers("/admin").access("hasAnyRole('ADMIN')")
-                                .antMatchers("/users").access("hasAnyRole('ADMIN','USER')")
+                                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                                .antMatchers("/users/**").hasAnyAuthority("ADMIN", "USER")
                                 .anyRequest().authenticated().and().formLogin().successHandler(new SuccessUserHandler());
         http.logout().permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

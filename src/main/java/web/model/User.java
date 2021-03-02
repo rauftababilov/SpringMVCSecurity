@@ -21,14 +21,8 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-
-    @Column(name = "name")
     public String name;
-
-    @Column(name = "email")
     public String email;
-
-    @Column(name = "password")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
