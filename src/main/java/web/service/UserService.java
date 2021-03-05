@@ -10,10 +10,15 @@ import java.util.Set;
 
 public interface UserService extends UserDetailsService {
     User findById(Long id);
+
     List<User> findAll();
+
     User findByName(String name);
+
     void saveUser(User user);
+
     void editUser(User user);
+
     void deleteById(Long id);
 
     Set<Role> findAllRoles();
